@@ -1,0 +1,29 @@
+# Build artifacts
+.pio/
+*.elf
+*.bin
+*.map
+
+# PlatformIO
+.pioenvs/
+.piolibdeps/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agent runtime (keep identity and logs, ignore transient state)
+agent/.cache/
+agent/sessions/

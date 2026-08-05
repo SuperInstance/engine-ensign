@@ -1,0 +1,32 @@
+/*
+ * sensors.h — Generic Diesel Sensor Definitions
+ */
+
+#ifndef SENSORS_H
+#define SENSORS_H
+
+#include <Arduino.h>
+#include "config.h"
+
+typedef struct {
+    float rpm;
+    float coolant_temp_c;
+    float oil_pressure_bar;
+    float battery_volts;
+    float fuel_rate_lph;
+    float engine_hours;
+    bool  data_valid;
+    uint32_t last_update_ms;
+} EngineData;
+
+extern EngineData engine;
+
+void init_tachometer(void);
+float read_rpm(void);
+float read_coolant_temp(void);
+float read_oil_pressure(void);
+float read_battery_voltage(void);
+float estimate_fuel_rate(float rpm);
+void read_all_sensors(void);
+
+#endif // SENSORS_H

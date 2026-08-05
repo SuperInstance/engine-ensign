@@ -1,0 +1,98 @@
+{
+  "name": "Generic Diesel 2.4-inch LCD",
+  "target_firmware": "firmware/generic_diesel",
+  "display": {
+    "type": "ILI9341",
+    "width": 320,
+    "height": 240,
+    "rotation": 1,
+    "color_depth": 18
+  },
+  "themes": {
+    "day": {
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "normal": "#00FF00",
+      "warning": "#FFFF00",
+      "critical": "#FF0000"
+    }
+  },
+  "current_theme": "day",
+  "backlight": {
+    "day_brightness": 220,
+    "night_brightness": 60,
+    "dim_brightness": 15,
+    "dim_after_ms": 30000
+  },
+  "alerts": {
+    "banner_position": { "x": 0, "y": 0, "width": 320, "height": 24 },
+    "buzzer_freq_hz": 2730,
+    "beep_duration_ms": 150
+  },
+  "gauges": [
+    {
+      "id": "rpm",
+      "type": "analog_dial",
+      "label": "RPM",
+      "data_source": "engine.rpm",
+      "position": { "x": 80, "y": 120 },
+      "radius": 65,
+      "min": 0,
+      "max": 3500,
+      "major_ticks": 7,
+      "minor_ticks": 5,
+      "yellow_zone": { "start": 2800, "end": 3000 },
+      "red_zone": { "start": 3000, "end": 3500 },
+      "digital_readout": true,
+      "readout_position": { "x": 80, "y": 140 }
+    },
+    {
+      "id": "coolant_temp",
+      "type": "bar_gauge",
+      "label": "TEMP",
+      "data_source": "engine.coolant_temp_c",
+      "position": { "x": 200, "y": 40 },
+      "size": { "width": 25, "height": 100 },
+      "orientation": "vertical",
+      "min": 40,
+      "max": 120,
+      "yellow_zone": { "start": 90, "end": 100 },
+      "red_zone": { "start": 100, "end": 120 },
+      "digital_readout": true,
+      "readout_position": { "x": 230, "y": 90 }
+    },
+    {
+      "id": "oil_pressure",
+      "type": "bar_gauge",
+      "label": "OIL",
+      "data_source": "engine.oil_pressure_bar",
+      "position": { "x": 260, "y": 40 },
+      "size": { "width": 25, "height": 100 },
+      "orientation": "vertical",
+      "min": 0,
+      "max": 5,
+      "normal_zone": { "start": 1.5, "end": 5 },
+      "yellow_zone": { "start": 0.7, "end": 1.5 },
+      "red_zone": { "start": 0, "end": 0.7 },
+      "digital_readout": true,
+      "readout_position": { "x": 290, "y": 90 }
+    }
+  ],
+  "readouts": [
+    {
+      "id": "volts",
+      "label": "BAT",
+      "data_source": "engine.battery_volts",
+      "position": { "x": 10, "y": 220 },
+      "format": "%.1fV"
+    },
+    {
+      "id": "fuel_rate",
+      "label": "RATE",
+      "data_source": "engine.fuel_rate_lph",
+      "position": { "x": 100, "y": 220 },
+      "format": "%.1f L/h"
+    }
+  ],
+  "status_indicators": []
+}

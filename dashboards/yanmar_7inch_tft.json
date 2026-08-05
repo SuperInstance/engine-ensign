@@ -1,0 +1,141 @@
+{
+  "name": "Yanmar 4LH-STE 7-inch TFT",
+  "target_firmware": "firmware/yanmar_4lh-ste",
+  "display": {
+    "type": "ILI9488",
+    "width": 480,
+    "height": 320,
+    "rotation": 1,
+    "color_depth": 18
+  },
+  "themes": {
+    "day": {
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "normal": "#00FF00",
+      "warning": "#FFFF00",
+      "critical": "#FF0000",
+      "accent": "#00FFFF",
+      "dial_face": "#404040"
+    },
+    "night": {
+      "background": "#000000",
+      "text": "#FF6600",
+      "normal": "#004400",
+      "warning": "#AAAA00",
+      "critical": "#AA0000",
+      "accent": "#0066AA",
+      "dial_face": "#202020"
+    }
+  },
+  "current_theme": "day",
+  "backlight": {
+    "day_brightness": 220,
+    "night_brightness": 60,
+    "dim_brightness": 15,
+    "dim_after_ms": 30000
+  },
+  "alerts": {
+    "banner_position": { "x": 0, "y": 0, "width": 480, "height": 30 },
+    "buzzer_freq_hz": 2730,
+    "beep_duration_ms": 150,
+    "silence_after_ack_ms": 5000
+  },
+  "gauges": [
+    {
+      "id": "rpm",
+      "type": "analog_dial",
+      "label": "RPM",
+      "data_source": "engine.rpm",
+      "position": { "x": 120, "y": 160 },
+      "radius": 90,
+      "min": 0,
+      "max": 4000,
+      "major_ticks": 8,
+      "minor_ticks": 4,
+      "yellow_zone": { "start": 3100, "end": 3300 },
+      "red_zone": { "start": 3300, "end": 4000 },
+      "digital_readout": true,
+      "readout_position": { "x": 120, "y": 180 }
+    },
+    {
+      "id": "coolant_temp",
+      "type": "bar_gauge",
+      "label": "COOLANT °C",
+      "data_source": "engine.coolant_temp_c",
+      "position": { "x": 260, "y": 40 },
+      "size": { "width": 30, "height": 120 },
+      "orientation": "vertical",
+      "min": 40,
+      "max": 120,
+      "yellow_zone": { "start": 88, "end": 95 },
+      "red_zone": { "start": 95, "end": 120 },
+      "digital_readout": true,
+      "readout_position": { "x": 295, "y": 100 }
+    },
+    {
+      "id": "oil_pressure",
+      "type": "bar_gauge",
+      "label": "OIL bar",
+      "data_source": "engine.oil_pressure_bar",
+      "position": { "x": 340, "y": 40 },
+      "size": { "width": 30, "height": 120 },
+      "orientation": "vertical",
+      "min": 0,
+      "max": 6,
+      "yellow_zone": { "start": 0, "end": 1.5 },
+      "red_zone": { "start": 0, "end": 0.8 },
+      "normal_zone": { "start": 1.5, "end": 6 },
+      "digital_readout": true,
+      "readout_position": { "x": 375, "y": 100 }
+    },
+    {
+      "id": "boost",
+      "type": "digital_readout",
+      "label": "BOOST",
+      "data_source": "engine.boost_pressure_bar",
+      "position": { "x": 420, "y": 60 },
+      "format": "%.1f bar",
+      "color_source": "normal"
+    }
+  ],
+  "readouts": [
+    {
+      "id": "volts",
+      "label": "BAT",
+      "data_source": "engine.alternator_volts",
+      "position": { "x": 20, "y": 290 },
+      "format": "%.1fV"
+    },
+    {
+      "id": "fuel",
+      "label": "FUEL",
+      "data_source": "engine.fuel_level_pct",
+      "position": { "x": 120, "y": 290 },
+      "format": "%.0f%%"
+    },
+    {
+      "id": "hours",
+      "label": "HRS",
+      "data_source": "engine.engine_hours",
+      "position": { "x": 220, "y": 290 },
+      "format": "%.0f"
+    },
+    {
+      "id": "fuel_rate",
+      "label": "RATE",
+      "data_source": "engine.fuel_rate_lph",
+      "position": { "x": 330, "y": 290 },
+      "format": "%.1f L/h"
+    }
+  ],
+  "status_indicators": [
+    {
+      "id": "check_engine",
+      "label": "CHECK ENGINE",
+      "data_source": "engine.check_engine",
+      "position": { "x": 420, "y": 290 },
+      "color_when_active": "#FF0000"
+    }
+  ]
+}

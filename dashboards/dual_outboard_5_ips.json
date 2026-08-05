@@ -1,0 +1,159 @@
+{
+  "name": "Dual Outboard 5-inch IPS",
+  "target_firmware": "firmware/dual_outboard",
+  "display": {
+    "type": "ST7789",
+    "width": 480,
+    "height": 320,
+    "rotation": 1,
+    "color_depth": 18
+  },
+  "themes": {
+    "day": {
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "normal": "#00FF00",
+      "warning": "#FFFF00",
+      "critical": "#FF0000",
+      "accent": "#00FFFF",
+      "dial_face": "#303030"
+    },
+    "night": {
+      "background": "#000000",
+      "text": "#FF6600",
+      "normal": "#004400",
+      "warning": "#AAAA00",
+      "critical": "#AA0000",
+      "accent": "#0066AA",
+      "dial_face": "#181818"
+    }
+  },
+  "current_theme": "day",
+  "backlight": {
+    "day_brightness": 220,
+    "night_brightness": 60,
+    "dim_brightness": 15,
+    "dim_after_ms": 30000
+  },
+  "alerts": {
+    "banner_position": { "x": 0, "y": 0, "width": 480, "height": 28 },
+    "buzzer_freq_hz": 2730,
+    "beep_duration_ms": 150,
+    "silence_after_ack_ms": 5000
+  },
+  "layout": "split_horizontal",
+  "split": {
+    "divider_x": 240,
+    "divider_color": "#404040"
+  },
+  "gauges": [
+    {
+      "id": "port_rpm",
+      "type": "analog_dial",
+      "label": "PORT RPM",
+      "data_source": "engines.port.rpm",
+      "position": { "x": 120, "y": 130 },
+      "radius": 70,
+      "min": 0,
+      "max": 7000,
+      "major_ticks": 7,
+      "minor_ticks": 5,
+      "yellow_zone": { "start": 5800, "end": 6000 },
+      "red_zone": { "start": 6000, "end": 7000 },
+      "digital_readout": true,
+      "readout_position": { "x": 120, "y": 150 }
+    },
+    {
+      "id": "port_temp",
+      "type": "digital_readout",
+      "label": "P TEMP",
+      "data_source": "engines.port.coolant_temp_c",
+      "position": { "x": 60, "y": 230 },
+      "format": "%.0fC",
+      "color_source": "threshold"
+    },
+    {
+      "id": "port_trim",
+      "type": "bar_gauge",
+      "label": "P TRIM",
+      "data_source": "engines.port.trim_degrees",
+      "position": { "x": 140, "y": 220 },
+      "size": { "width": 80, "height": 15 },
+      "orientation": "horizontal",
+      "min": 0,
+      "max": 30,
+      "yellow_zone": { "start": 20, "end": 25 },
+      "red_zone": { "start": 25, "end": 30 }
+    },
+    {
+      "id": "stbd_rpm",
+      "type": "analog_dial",
+      "label": "STBD RPM",
+      "data_source": "engines.starboard.rpm",
+      "position": { "x": 360, "y": 130 },
+      "radius": 70,
+      "min": 0,
+      "max": 7000,
+      "major_ticks": 7,
+      "minor_ticks": 5,
+      "yellow_zone": { "start": 5800, "end": 6000 },
+      "red_zone": { "start": 6000, "end": 7000 },
+      "digital_readout": true,
+      "readout_position": { "x": 360, "y": 150 }
+    },
+    {
+      "id": "stbd_temp",
+      "type": "digital_readout",
+      "label": "S TEMP",
+      "data_source": "engines.starboard.coolant_temp_c",
+      "position": { "x": 300, "y": 230 },
+      "format": "%.0fC",
+      "color_source": "threshold"
+    },
+    {
+      "id": "stbd_trim",
+      "type": "bar_gauge",
+      "label": "S TRIM",
+      "data_source": "engines.starboard.trim_degrees",
+      "position": { "x": 380, "y": 220 },
+      "size": { "width": 80, "height": 15 },
+      "orientation": "horizontal",
+      "min": 0,
+      "max": 30,
+      "yellow_zone": { "start": 20, "end": 25 },
+      "red_zone": { "start": 25, "end": 30 }
+    }
+  ],
+  "readouts": [
+    {
+      "id": "fuel_level",
+      "label": "FUEL",
+      "data_source": "engines.fuel_level_pct",
+      "position": { "x": 120, "y": 290 },
+      "format": "%.0f%%"
+    },
+    {
+      "id": "total_rate",
+      "label": "TOTAL",
+      "data_source": "engines.total_fuel_rate",
+      "position": { "x": 300, "y": 290 },
+      "format": "%.1f L/h"
+    }
+  ],
+  "status_indicators": [
+    {
+      "id": "port_check_engine",
+      "label": "P CHK",
+      "data_source": "engines.port.check_engine",
+      "position": { "x": 20, "y": 290 },
+      "color_when_active": "#FF0000"
+    },
+    {
+      "id": "stbd_check_engine",
+      "label": "S CHK",
+      "data_source": "engines.starboard.check_engine",
+      "position": { "x": 420, "y": 290 },
+      "color_when_active": "#FF0000"
+    }
+  ]
+}
