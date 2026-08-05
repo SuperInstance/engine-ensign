@@ -424,7 +424,7 @@ def generate_main_c(engine_name: str, sensors: list, display: dict) -> str:
         "    draw_splash(ENGINE_NAME, FIRMWARE_VERSION);",
         "    delay(2000);",
         "",
-    ]
+    ])
 
     if has_nmea:
         lines.extend([
