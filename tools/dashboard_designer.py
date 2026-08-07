@@ -50,7 +50,7 @@ def load_dashboard(name: str) -> dict:
     return json.loads(path.read_text())
 
 
-def save_dashboard(name: str, data: dict):
+def save_dashboard(name: str, data: dict) -> None:
     """Save dashboard JSON."""
     path = DASHBOARDS_DIR / f"{name}.json"
     path.write_text(json.dumps(data, indent=2) + '\n')
@@ -65,7 +65,7 @@ def find_gauge(data: dict, gauge_id: str) -> dict | None:
     return None
 
 
-def cmd_list(args):
+def cmd_list(args: argparse.Namespace) -> None:
     """List available dashboards."""
     files = sorted(DASHBOARDS_DIR.glob("*.json"))
     if not files:
@@ -84,13 +84,13 @@ def cmd_list(args):
         print(f"  {f.stem:<30} {name:<40} {disp_type} {dims}  {n_gauges} gauges, {n_readouts} readouts  theme={theme}")
 
 
-def cmd_show(args):
+def cmd_show(args: argparse.Namespace) -> None:
     """Show dashboard details."""
     data = load_dashboard(args.dashboard)
     print(json.dumps(data, indent=2))
 
 
-def cmd_swap(args):
+def cmd_swap(args: argparse.Namespace) -> None:
     """Swap positions of two gauges."""
     data = load_dashboard(args.dashboard)
     g1 = find_gauge(data, args.gauge1)
@@ -104,7 +104,7 @@ def cmd_swap(args):
     print(f"  ✓ Swapped positions of '{args.gauge1}' and '{args.gauge2}'")
 
 
-def cmd_theme(args):
+def cmd_theme(args: argparse.Namespace) -> None:
     """Set the current theme."""
     data = load_dashboard(args.dashboard)
     themes = data.get("themes", {})
@@ -116,7 +116,7 @@ def cmd_theme(args):
     print(f"  ✓ Theme set to '{args.theme}'")
 
 
-def cmd_add_gauge(args):
+def cmd_add_gauge(args: argparse.Namespace) -> None:
     """Add a new gauge."""
     data = load_dashboard(args.dashboard)
     try:
@@ -133,7 +133,7 @@ def cmd_add_gauge(args):
     print(f"  ✓ Added gauge '{gauge['id']}'")
 
 
-def cmd_remove_gauge(args):
+def cmd_remove_gauge(args: argparse.Namespace) -> None:
     """Remove a gauge."""
     data = load_dashboard(args.dashboard)
     before = len(data.get("gauges", []))
@@ -146,7 +146,7 @@ def cmd_remove_gauge(args):
         print(f"  ✓ Removed gauge '{args.gauge_id}'")
 
 
-def cmd_move(args):
+def cmd_move(args: argparse.Namespace) -> None:
     """Move a gauge to new coordinates."""
     data = load_dashboard(args.dashboard)
     gauge = find_gauge(data, args.gauge_id)
@@ -161,7 +161,7 @@ def cmd_move(args):
     print(f"  ✓ Moved '{args.gauge_id}' to ({pos.get('x')}, {pos.get('y')})")
 
 
-def cmd_resize(args):
+def cmd_resize(args: argparse.Namespace) -> None:
     """Resize a gauge."""
     data = load_dashboard(args.dashboard)
     gauge = find_gauge(data, args.gauge_id)
@@ -182,7 +182,7 @@ def cmd_resize(args):
     print(f"  ✓ Resized '{args.gauge_id}'")
 
 
-def cmd_set_threshold(args):
+def cmd_set_threshold(args: argparse.Namespace) -> None:
     """Set yellow/red threshold zones for a gauge."""
     data = load_dashboard(args.dashboard)
     gauge = find_gauge(data, args.gauge_id)
@@ -201,7 +201,7 @@ def cmd_set_threshold(args):
     print(f"  ✓ Threshold updated for '{args.gauge_id}'")
 
 
-def cmd_set_backlight(args):
+def cmd_set_backlight(args: argparse.Namespace) -> None:
     """Set backlight brightness values."""
     data = load_dashboard(args.dashboard)
     bl = data.setdefault("backlight", {})
@@ -215,7 +215,7 @@ def cmd_set_backlight(args):
     print(f"  ✓ Backlight updated")
 
 
-def cmd_validate(args):
+def cmd_validate(args: argparse.Namespace) -> None:
     """Validate a dashboard config for common issues."""
     data = load_dashboard(args.dashboard)
     issues = []
@@ -270,7 +270,7 @@ def cmd_validate(args):
         print(f"  ✓ '{args.dashboard}' validates cleanly ({len(data.get('gauges', []))} gauges, {len(data.get('readouts', []))} readouts)")
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Modify dashboard layouts programmatically."
     )

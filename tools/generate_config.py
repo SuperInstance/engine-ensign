@@ -726,7 +726,7 @@ def generate_dashboard_json(engine_name: str, display: dict,
     return json.dumps(dash, indent=2) + '\n'
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Generate ESP32 firmware config for a new engine monitoring setup."
     )
