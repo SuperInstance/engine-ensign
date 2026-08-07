@@ -27,3 +27,6 @@ Thumbs.db
 # Agent runtime (keep identity and logs, ignore transient state)
 agent/.cache/
 agent/sessions/
+.coverage
+.pytest_cache/
+.wrangler/
