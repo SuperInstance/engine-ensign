@@ -212,7 +212,6 @@ def generate_config_h(engine_name: str, sensors: list, display: dict,
 
     # Analog pin assignments
     analog_pins = []
-    next_adc_pin = 34
     for spec in sensors:
         if spec in SENSOR_TYPES and SENSOR_TYPES[spec].get("default_pin"):
             s = SENSOR_TYPES[spec]
@@ -607,8 +606,8 @@ def generate_platformio_ini(engine_name: str, sensors: list, display: dict,
     else:
         lines.append("    arduino-libraries/ArduinoJson@^6.21.0")
 
-    # Filter empty strings
-    lines = [l for l in lines if l != "" or True]  # keep blanks for readability
+    # Filter out empty strings (from optional display defines) but keep readable blank lines
+    lines = [l for l in lines if l != ""]
     return '\n'.join(lines) + '\n'
 
 
